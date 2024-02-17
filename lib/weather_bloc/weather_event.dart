@@ -1,8 +1,13 @@
 part of 'weather_bloc.dart';
-
-sealed class WeatherEvent extends Equatable {
+abstract class WeatherEvent extends Equatable {
   const WeatherEvent();
+}
+
+class FetchWeatherEvent extends WeatherEvent {
+  final String city;
+
+  const FetchWeatherEvent({required this.city});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [city];
 }
