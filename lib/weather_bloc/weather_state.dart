@@ -8,17 +8,18 @@ class WeatherInitial extends WeatherState {
   const WeatherInitial();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class WeatherLoaded extends WeatherState {
   final String cityName;
   final double temperature;
+  final String description;
 
-  const WeatherLoaded({required this.cityName, required this.temperature});
+  const WeatherLoaded({required this.cityName, required this.temperature, required this.description});
 
   @override
-  List<Object> get props => [cityName, temperature];
+  List<Object?> get props => [cityName, temperature, description];
 }
 
 class WeatherFailure extends WeatherState {
@@ -27,5 +28,5 @@ class WeatherFailure extends WeatherState {
   const WeatherFailure({required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message];
 }

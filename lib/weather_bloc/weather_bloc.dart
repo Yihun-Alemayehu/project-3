@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
@@ -20,7 +21,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           final data = jsonDecode(response.body);
           final cityName = data["name"];
           final temp = data["main"]["temp"].toDouble();
-          emit(WeatherLoaded(cityName: cityName, temperature: temp));
+          final description = data["weather"]["description"];
+          emit(WeatherLoaded(cityName: cityName, temperature: temp, description: description));
         }
       } catch (e) {
         emit(const WeatherFailure(message: 'Failed to fetch weather data ..!'));
