@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text(state.description),
+                        // Text(state.description),
                         
                       ],
                     )
