@@ -17,12 +17,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     on<FetchWeatherEvent>((event, emit) async {
       try {
         final response = await http.get(Uri.parse(
-            'https://api.openweathermap.org/data/2.5/weather?q=${event.city}&appid=$API_KEY_2'));
+            'https://api.openweathermap.org/data/2.5/weather?q=${event.city}&appid=$API_KEY'));
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           final cityName = data["name"];
           final temp = data["main"]["temp"].toDouble();
-          final desc = data["weather"]["description"];
+          // final desc = data["weather"]["description"];
           emit(WeatherLoaded(cityName: cityName, temperature: temp));
         }       
       } catch (e) {

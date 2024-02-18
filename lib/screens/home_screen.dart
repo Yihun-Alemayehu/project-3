@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_3/screens/result_screen.dart';
 import 'package:project_3/weather_bloc/weather_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,25 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Weather app'),
         centerTitle: true,
       ),
-      body: BlocBuilder<WeatherBloc, WeatherState>(
+      body: BlocConsumer<WeatherBloc, WeatherState>(
+        listener: (context, state) {
+          if (state is WeatherLoaded) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WeatherResultScreen(state: state),
+              ),
+            );
+          }
+          if (state is WeatherFailure) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WeatherResultScreen(state: state),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return Center(
             child: Padding(
@@ -45,26 +64,25 @@ class HomeScreen extends StatelessWidget {
                     },
                     child: const Text('Search'),
                   ),
-                  if (state is WeatherLoaded)
-                    Column(
-                      children: [
-                        Text(state.cityName),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(state.temperature.toString()),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // Text(state.description),
-                        
-                      ],
-                    )
-                  else if (state is WeatherFailure)
-                    Text(
-                      'Error: ${state.message}',
-                      style: TextStyle(color: Colors.red),
-                    ),
+                  // if (state is WeatherLoaded)
+                  //   Column(
+                  //     children: [
+                  //       Text(state.cityName),
+                  //       const SizedBox(
+                  //         height: 20,
+                  //       ),
+                  //       Text(state.temperature.toString()),
+                  //       const SizedBox(
+                  //         height: 20,
+                  //       ),
+                  //       // Text(state.description),
+                  //     ],
+                  //   )
+                  // else if (state is WeatherFailure)
+                  //   Text(
+                  //     'Error: ${state.message}',
+                  //     style: TextStyle(color: Colors.red),
+                  //   ),
                 ],
               ),
             ),
